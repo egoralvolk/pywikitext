@@ -1,0 +1,19 @@
+﻿encoding "utf8";
+
+TTextMinerConfig{
+	Dictionary = "dic.gzt";
+	
+	Input = {File = "input.txt"}
+	
+	Output = {File = "output.xml" Format = xml}
+	
+    PrettyOutput = "result.html";
+	
+	Articles = [
+		{Name = "person"}
+	]	
+	
+	Facts = [
+		{Name = "Person"}
+	]
+}
