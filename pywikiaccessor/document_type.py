@@ -48,6 +48,7 @@ for docType in DocumentTypeConfig.doctypeList:
     r = index.getDocsOfType(docType)
     print(docType+": "+str(len(r)))
 '''
+
 import pickle
 import json
 import re
@@ -200,7 +201,9 @@ class ANTLRTemplateParser (WikiDocTypeParser):
         return result        
 '''
                                     
-from pywikiaccessor import wiki_iterator,wiki_file_index
+from pywikiaccessor import wiki_iterator, wiki_file_index, wiki_accessor
+
+
 # Индекс типов документов
 class DocumentTypeIndex(wiki_file_index.WikiFileIndex):
     def __init__(self, wikiAccessor):
@@ -216,7 +219,7 @@ class DocumentTypeIndex(wiki_file_index.WikiFileIndex):
         dtList = self.getDocTypeById(ident)
         if not dtList:
             return False 
-        return docType.lower() in dtList
+        return docType in dtList
 
     def getDocsOfType(self,docType):
         return self.dictionaries['doctype_DocTypesToId'][docType]
@@ -277,27 +280,19 @@ class DocumentTypeIndexBuilder (wiki_iterator.WikiIterator):
                 self.dataToIds[docType] = set()
             self.dataToIds[docType].add(docId)
 
-#if __name__ == '__main__':
-#from pywikiaccessor.wiki_accessor import WikiAccessor            
-#directory = "C:\\WORK\\science\\onpositive_data\\python\\"
-#accessor =  WikiAccessor(directory)
- 
-#Построение:
-#bld = DocumentTypeIndexBuilder(accessor)
-#titleIndex = accessor.getIndex(TitleIndex)
-#docId = titleIndex.getIdByTitle('5-HT2B-рецептор')
-#bld = DocumentTypeIndexBuilder(accessor)
-#bld.preProcess()
-#bld.processDocument(docId)
-#print(bld.dataToTypes)
-#bld.build()
 
-#titleIndex = accessor.getIndex(TitleIndex)
-#index = DocumentTypeIndex(accessor)
-#r = index.getDocsOfType('software')
-#print(len(r))
-#import codecs
-#with codecs.open( directory+'titles_soft.txt', 'w', 'utf-8' ) as f:
-#    for docId in r:
-#        f.write(titleIndex.getTitleById(docId)+'\n')
-#    f.close()
+if __name__ == "__main__":
+    directory = "D:\\Git\\pywikitext-master\\indexes\\"
+    accessor = wiki_accessor.WikiAccessor(directory)
+    #
+    bld = DocumentTypeIndexBuilder(accessor)
+    bld.build()
+    #
+    # titleIndex = TitleIndex(accessor)
+    index = DocumentTypeIndex(accessor)
+    # docId = titleIndex.getIdByTitle("Арцебарский, Анатолий Павлович")
+    print(index.getDocsOfType('hockey_match'))
+    # print(index.getDocTypeById(41))
+# print(index.getDocTypeById(titleIndex.getIdByTitle("Санкт-Петербург")))
+# print(index.getDocTypeById(titleIndex.getIdByTitle('Великая теорема Ферма')))
+

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pickle
 
-from pywikiaccessor import wiki_iterator, wiki_file_index
+from pywikiaccessor import wiki_iterator, wiki_file_index, wiki_accessor
 from pywikiaccessor.wiki_base_index import WikiTitleBaseIndex
 
 class TitleIndex (wiki_file_index.WikiFileIndex):
@@ -67,12 +67,19 @@ class TitleIndexBuilder (wiki_iterator.WikiIterator):
         self.toTitleDict[docId] = title
         self.toIdDict[title] = docId
 
-#directory = "C:\\WORK\\science\\onpositive_data\\python\\"
+
 #titleIndexBuilder = TitleIndexBuilder(directory)
 #titleIndexBuilder.build()
-#accessor =  wiki_accessor.WikiAccessorFactory.getAccessor(directory)
-#titleIndex = accessor.titleIndex
+# directory = "D:\\Git\\pywikitext-master\\indexes\\"
+# accessor =  wiki_accessor.WikiAccessor(directory)
+# titleIndex = TitleIndex(accessor)
+# print(titleIndex.getTitleById(4194304))
 #print(titleIndex.getIdByTitle("москва"))
 #print(titleIndex.getIdByTitle("гражданская война в россии"))
-#print(titleIndex.getTitleById(7))
 #print(titleIndex.getIdByTitle(titleIndex.getTitleById(7)))
+
+# directory = "D:\\Git\\pywikitext-master\\indexes\\"
+# #titleIndexBuilder.build()
+# accessor =  wiki_accessor.WikiAccessor(directory)
+# titleIndexBuilder = TitleIndexBuilder(accessor)
+# titleIndexBuilder.build()

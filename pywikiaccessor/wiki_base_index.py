@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import codecs
-import xml.sax   
+import xml.sax
 
+from pywikiaccessor import wiki_accessor
 from pywikiaccessor.wiki_file_index import WikiFileIndex
 
 class WikiBaseIndex (WikiFileIndex):
@@ -62,4 +63,8 @@ class WikiBaseIndexBuilder:
     def build(self):
         inputXml = codecs.open(self.directory+self.wikiDumpFile, 'r', 'utf-8')
         from pywikiaccessor import xml_wiki_parser
-        xml.sax.parse(inputXml, xml_wiki_parser.XMLWikiParser(self.directory)) 
+        xml.sax.parse(inputXml, xml_wiki_parser.XMLWikiParser(self.directory))
+
+# directory = "D:\\Git\\pywikitext-master\\indexes\\"
+# base = WikiBaseIndexBuilder(directory, "articles.xml")
+# base.build()

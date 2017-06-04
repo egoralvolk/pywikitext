@@ -14,7 +14,7 @@ class WikiIterator(metaclass=ABCMeta):
         self.clear()
         self.preProcess()
         articlesCount = 0
-        self.prevArticlesCount = 0;
+        self.prevArticlesCount = 0
         if self.docList:
             indexes = self.docList
         else:  

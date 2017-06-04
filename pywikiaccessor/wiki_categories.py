@@ -15,8 +15,7 @@ class CategoryIndex (wiki_file_index.WikiFileIndex):
             'cat_IdToChildrenIndex',
             'cat_IdToParentIndex',
             'cat_IdToPagesIndex',
-            'cat_PagesToCatIndex',
-            'cat_CategoryPages']
+            'cat_PagesToCatIndex']
                         
     def getTitleById(self, ident):
         if len(self.dictionaries['cat_IdToTitleIndex']) <= ident:
@@ -190,11 +189,18 @@ class CategoryFromPagesBuilder (wiki_iterator.WikiIterator):
                 self.toChildrenDict[parentCatId].append(catId)
             self.toPagesDict[parentCatId].append(docId)
             self.toPageCatDict[docId].append(parentCatId)
-            
-#from pywikiaccessor import wiki_accessor
-#from pywikiaccessor import title_index
-#directory = "C:\\WORK\\science\\onpositive_data\\python\\"
-#accessor =  wiki_accessor.WikiAccessor(directory)
+
+if __name__ == "__main__":
+    from pywikiaccessor import wiki_accessor
+    from pywikiaccessor import title_index
+    directory = "D:\\Git\\pywikitext-master\\indexes\\"
+    accessor =  wiki_accessor.WikiAccessor(directory)
+    catsIndex = CategoryIndex(accessor)
+    titleIndex = title_index.TitleIndex(accessor)
+    print(titleIndex.getTitleById(4820996))
+# artics = catsIndex.getAllPagesAsSet(catsIndex.getIdByTitle("Революции в России"))
+# for a in artics:
+#     print(titleIndex.getTitleById(a))
 #titleIndex = accessor.getIndex(title_index.TitleIndex)
 #docId = titleIndex.getIdByTitle('Ван Боксхорн, Маркус')
 #bld = CategoryIndexBuilder(accessor)
